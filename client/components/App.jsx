@@ -10,7 +10,8 @@ const App = React.createClass( {
           name: 'James Mead',
           type: 'Flat White',
           size: 'Small',
-          mods: ['Almond Milk', 'Soy Milk'],
+          modifiers: ['Almond Milk', 'Soy Milk'],
+          sugars: 1,
           comments: 'I want a picture of a dog on top'
         },
         {
@@ -18,8 +19,18 @@ const App = React.createClass( {
           name: 'Alex Blair',
           type: 'Mocha',
           size: 'Small',
-          mods: ['Almond Milk', 'Soy Milk'],
+          modifiers: ['Almond Milk', 'Soy Milk'],
+          sugars: 0,
           comments: 'I want a picture of a cat on top'
+        },
+        {
+          id: 3,
+          name: 'Bob',
+          type: 'Mocha',
+          size: 'Small',
+          modifiers: [],
+          sugars: 4,
+          comments: ''
         }
       ]
     }
