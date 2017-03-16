@@ -16,7 +16,7 @@ const App = React.createClass( {
         {
           id: 2,
           name: 'Alex Blair',
-          type: 'Flat White',
+          type: 'Mocha',
           size: 'Small',
           mods: ['Almond Milk', 'Soy Milk'],
           comments: 'I want a picture of a cat on top'

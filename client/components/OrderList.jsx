@@ -10,7 +10,7 @@ const OrderList = props => {
       <ul>
         {props.orders.map(order => {
           return (
-            <li key={order.id}>{order.name} - {order.type}</li>
+            <Order order={order} key={order.id} />
           )
         })}
       </ul>
