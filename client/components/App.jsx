@@ -1,10 +1,13 @@
 import React from 'react'
+import OrderList from './OrderList'
 
 const App = () => {
   return (
-    <h1>React development has begun!</h1>
+    <div>
+      <h1>Order page!</h1>
+      <OrderList />
+    </div>
   )
 }
 
 export default App
-
