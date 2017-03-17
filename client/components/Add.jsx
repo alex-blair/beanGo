@@ -10,11 +10,13 @@ const Add = React.createClass({
         size: '',
         modifiers: [],
         sugars: 0,
-        comments: ''
+        comments: '',
+        ...this.props.currentOrder
       }
     }
   },
   render () {
+    console.log(this.props)
     return (
       <div className='add'>
         <h3>Add your order</h3>
@@ -27,7 +29,7 @@ const Add = React.createClass({
             onChange={this.updateName}
             value={this.state.order.name} />
           <h4>Type</h4>
-          <select name='type' onChange={this.updateType}>
+          <select name='type' onChange={this.updateType} defaultValue={this.state.order.type}>
             <option value='No Drink Selected'>Select drink</option>
             <option value='Mocha'>Mocha</option>
             <option value='Flat White'>Flat White</option>
@@ -45,15 +47,15 @@ const Add = React.createClass({
           </select>
           <h4>Size or Keep Cup</h4>
           <div className='sizeSelect'>
-            <input onChange={this.updateSize} type='radio' name='size' value='Small' checked={false} />Small
-            <input onChange={this.updateSize} type='radio' name='size' value='Large' />Large
-            <input onChange={this.updateSize} type='radio' name='size' value='Keep Cup' />Keep Cup
+            <input onChange={this.updateSize} type='radio' name='size' value='Small' checked={this.state.order.size === 'Small'} />Small
+            <input onChange={this.updateSize} type='radio' name='size' value='Large' checked={this.state.order.size === 'Large'} />Large
+            <input onChange={this.updateSize} type='radio' name='size' value='Keep Cup' checked={this.state.order.size === 'Keep Cup'} />Keep Cup
           </div>
           <h4>Modifiers</h4>
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Soy' />Soy Milk
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Almond' />Almond Milk
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Cinnamon' />Cinnamon Sprinkles
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Chocolate' />Chocolate Sprinkles
+          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Soy' checked={this.state.order.modifiers.includes('Soy')} />Soy Milk
+          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Almond' checked={this.state.order.modifiers.includes('Almond')}/>Almond Milk
+          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Cinnamon' checked={this.state.order.modifiers.includes('Cinnamon')}/>Cinnamon Sprinkles
+          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Chocolate' checked={this.state.order.modifiers.includes('Chocolate')}/>Chocolate Sprinkles
           <h4>Sugars</h4>
           <input onChange={this.updateSugars} type='number' name='sugars' value={this.state.order.sugars} min='0' max='4' />
           <h4>Additional Comments</h4>

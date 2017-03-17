@@ -15,7 +15,7 @@ const App = React.createClass({
           name: 'James Mead',
           type: 'Flat White',
           size: 'Small',
-          modifiers: ['Almond Milk', 'Soy Milk'],
+          modifiers: ['Almond', 'Soy'],
           sugars: 1,
           comments: 'Please add a cinnamon stick'
         },
@@ -47,6 +47,15 @@ const App = React.createClass({
         <Route exact path="/" render={() => <Home orders={orders} />} />
         <Route path="/test" component={Test} />
         <Route path="/add" render={() => <Add addOrder={this.addOrder} />} />
+        <Route path="/edit/:id" render={(props) => {
+          console.log(props)
+          var currentOrder = this.state.activeOrders.filter(function(order) {
+            return order.id === Number(props.match.params.id)
+          } )[0]
+          return (
+            <Add addOrder={this.addOrder} currentOrder={currentOrder} />
+          )
+        }} />
       </div>
     )
   },
