@@ -4,7 +4,6 @@ const Add = React.createClass({
   getInitialState () {
     return {
       order: {
-        id: 0,
         name: '',
         type: '',
         size: '',
@@ -15,6 +14,7 @@ const Add = React.createClass({
     }
   },
   render () {
+    console.log(this.props)
     return (
       <div className='add'>
         <h3>Add your order</h3>
@@ -45,25 +45,30 @@ const Add = React.createClass({
           </select>
           <h4>Size or Keep Cup</h4>
           <div className='sizeSelect'>
-            <input onChange={this.updateSize} type='radio' name='size' value='Small' checked={false} />Small
+            <input onChange={this.updateSize} type='radio' name='size' value='Small' />Small
             <input onChange={this.updateSize} type='radio' name='size' value='Large' />Large
             <input onChange={this.updateSize} type='radio' name='size' value='Keep Cup' />Keep Cup
           </div>
           <h4>Modifiers</h4>
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Soy' />Soy Milk
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Almond' />Almond Milk
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Cinnamon' />Cinnamon Sprinkles
-          <input onChange={this.updateModifiers} type='checkbox' name='modifier' value='Chocolate' />Chocolate Sprinkles
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Soy' />Soy Milk
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Almond' />Almond Milk
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Cinnamon' />Cinnamon Sprinkles
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Chocolate' />Chocolate Sprinkles
           <h4>Sugars</h4>
           <input onChange={this.updateSugars} type='number' name='sugars' value={this.state.order.sugars} min='0' max='4' />
           <h4>Additional Comments</h4>
           <input type='text' name='comments'
             onChange={this.updateComments}
             value={this.state.order.comments} />
-          <input type='button' onClick={this.props.addOrder} value='Add Order' />
+
         </div>
+        <button onClick={this.handleClick}>Add your Order!</button>
       </div>
     )
+  },
+  handleClick () {
+    this.props.addOrder(this.state.order)
+    this.props.history.push('/')
   },
   updateFormState (field, newValue) {
     const newState = {
@@ -90,14 +95,13 @@ const Add = React.createClass({
     this.updateFormState(size, value)
   },
   updateModifiers (evt) {
-    console.log(evt)
-    console.log(evt.target.checked)
     let modifiers = this.state.order.modifiers
     if (evt.target.checked) {
       modifiers.push(evt.target.value)
     } else {
       modifiers = modifiers.filter(modifier => (modifier !== evt.target.value))
     }
+    console.log(modifiers)
     let field = evt.target.name
     this.updateFormState(field, modifiers)
   },

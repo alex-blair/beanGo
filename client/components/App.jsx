@@ -9,35 +9,7 @@ import Test from './Test'
 const App = React.createClass({
   getInitialState () {
     return {
-      activeOrders: [
-        {
-          id: 1,
-          name: 'James Mead',
-          type: 'Flat White',
-          size: 'Small',
-          modifiers: ['Almond Milk', 'Soy Milk'],
-          sugars: 1,
-          comments: 'Please add a cinnamon stick'
-        },
-        {
-          id: 2,
-          name: 'Alex Blair',
-          type: 'Mocha',
-          size: 'Small',
-          modifiers: ['Almond Milk', 'Soy Milk'],
-          sugars: 0,
-          comments: 'I want a picture of a cat on top'
-        },
-        {
-          id: 3,
-          name: 'Bob',
-          type: 'Mocha',
-          size: 'Small',
-          modifiers: [],
-          sugars: 4,
-          comments: ''
-        }
-      ]
+      activeOrders: []
     }
   },
   render() {
@@ -46,11 +18,21 @@ const App = React.createClass({
       <div>
         <Route exact path="/" render={() => <Home orders={orders} />} />
         <Route path="/test" component={Test} />
-        <Route path="/add" render={() => <Add addOrder={this.addOrder} />} />
+        <Route path="/add" render={(props) => <Add addOrder={this.addOrder} {...props}/>} />
       </div>
     )
   },
-  addOrder () {}
+  addOrder (newOrder) {
+    let id = this.state.activeOrders.length++
+    newOrder.id = id
+    console.log(...this.state.activeOrders)
+    const newState = {
+      activeOrders: this.state.activeOrders
+    }
+    newState.activeOrders.push(newOrder)
+    console.log(newState)
+    this.setState(newState)
+  }
 })
 
 export default App
