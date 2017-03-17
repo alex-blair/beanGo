@@ -1,11 +1,12 @@
 import React from 'react'
+import Add from './Add'
 
 import {Route} from 'react-router-dom'
 
 import Home from './Home'
 import Test from './Test'
 
-const App = React.createClass( {
+const App = React.createClass({
   getInitialState () {
     return {
       activeOrders: [
@@ -45,10 +46,10 @@ const App = React.createClass( {
       <div>
         <Route exact path="/" render={() => <Home orders={orders}/>}/>
         <Route path="/test" component={Test}/>
+        <Add />
       </div>
     )
   }
 })
-
 
 export default App
