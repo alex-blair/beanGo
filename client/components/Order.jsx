@@ -27,7 +27,7 @@ const Order = props => {
             : <div className='comments property'>{props.order.comments}</div>}
 
         <div className='edit property'>
-          <Link to='/test'><button className='editButton'>Edit</button></Link>
+          <Link to={`/edit/${props.order.id}`}><button className='editButton'>Edit</button></Link>
         </div>
       </div>
     </div>
