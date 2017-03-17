@@ -1,4 +1,35 @@
+/** {
+  border: 1px black solid;
+}*/
+
 .orderContainer {
   box-shadow: 5px 5px 5px gray;
   border: 1px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+
+.orderDetails {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.property {
+  padding: 20px;
+}
+
+.comments {
+  align-self: flex-end;
+}
+
+.addOrderButton {
+  padding: 10px;
+  background-color: white;
+  font-size: 30px;
+  border-radius: 20%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
 }

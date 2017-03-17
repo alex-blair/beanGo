@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Order = props => {
   // const addSpaceBetweenModifiers = props.order.modifiers.map (modifier => ' ' + modifier)
@@ -9,26 +10,24 @@ const Order = props => {
         <h3>{props.order.name}</h3>
       </div>
       <div className='orderDetails'>
-        <div className='size'>
+        <div className='size property'>
           {props.order.size}
         </div>
-        <div className='type'>
+        <div className='type property'>
         {props.order.type}
         </div>
-        <div className='modifiers'>
           {props.order.modifiers.length === 0
             ? null
-            : 'with ' + addSpaceBetweenModifiers}
-        </div>
-        <div className='sugars'>
+            : <div className='modifiers property'>{'with ' + addSpaceBetweenModifiers}</div>}
           {props.order.sugars === 0
             ? null
-            : props.order.sugars + ' x sugar'}
-        </div>
-        <div className='comments'>
+            : <div className='sugars property'>{props.order.sugars + ' x sugar'}</div>}
           {props.order.comments === ''
             ? null
-            : props.order.comments}
+            : <div className='comments property'>{props.order.comments}</div>}
+
+        <div className='edit property'>
+          <Link to='/test'><button className='editButton'>Edit</button></Link>
         </div>
       </div>
     </div>

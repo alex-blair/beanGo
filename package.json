@@ -31,6 +31,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.3",
     "webpack": "^1.14.0",

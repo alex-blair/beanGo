@@ -1,5 +1,9 @@
 import React from 'react'
+
+import {Route} from 'react-router-dom'
+
 import Home from './Home'
+import Test from './Test'
 
 const App = React.createClass( {
   getInitialState () {
@@ -12,7 +16,7 @@ const App = React.createClass( {
           size: 'Small',
           modifiers: ['Almond Milk', 'Soy Milk'],
           sugars: 1,
-          comments: 'I want a picture of a dog on top'
+          comments: 'Please add a cinnamon stick'
         },
         {
           id: 2,
@@ -39,7 +43,8 @@ const App = React.createClass( {
     const orders = this.state.activeOrders
     return (
       <div>
-        <Home orders={orders} />
+        <Route exact path="/" render={() => <Home orders={orders}/>}/>
+        <Route path="/test" component={Test}/>
       </div>
     )
   }
