@@ -60,6 +60,7 @@ const Add = React.createClass({
           <input type='text' name='comments'
             onChange={this.updateComments}
             value={this.state.order.comments} />
+          <input type='button' onClick={this.props.addOrder} value='Add Order' />
         </div>
       </div>
     )

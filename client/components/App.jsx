@@ -44,12 +44,13 @@ const App = React.createClass({
     const orders = this.state.activeOrders
     return (
       <div>
-        <Route exact path="/" render={() => <Home orders={orders}/>}/>
-        <Route path="/test" component={Test}/>
-        <Add />
+        <Route exact path="/" render={() => <Home orders={orders} />} />
+        <Route path="/test" component={Test} />
+        <Route path="/add" render={() => <Add addOrder={this.addOrder} />} />
       </div>
     )
-  }
+  },
+  addOrder () {}
 })
 
 export default App

@@ -8,7 +8,7 @@ const Home = props => {
     <div>
       <OrderList orders={props.orders} />
       <div className='buttons'>
-        <Link to='/test'><button className='addOrderButton'>+</button></Link>
+        <Link to='/add'><button className='addOrderButton'>+</button></Link>
 
       </div>
     </div>
