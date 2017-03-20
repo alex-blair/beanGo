@@ -18,7 +18,16 @@ const App = React.createClass({
       <div>
         <Route exact path="/" render={(props) => <Home orders={orders} {...props} />} />
         <Route path="/test" component={Test} />
-        <Route path="/add" render={(props) => <Add addOrder={this.addOrder} {...props}/>} />
+        <Route path="/add" render={(props) => <Add addOrder={this.addOrder} {...props} />} />
+        <Route path="/edit/:id" render={(props) => {
+          console.log(props)
+          var currentOrder = this.state.activeOrders.filter(function (order) {
+            return order.id === Number(props.match.params.id)
+          } )[0]
+          return (
+            <Add addOrder={this.addOrder} currentOrder={currentOrder} />
+          )
+        }} />
         <Route path="*" render={() =><h1>Sorry, no route found</h1>} />
       </div>
     )
