@@ -16,9 +16,10 @@ const App = React.createClass({
     const orders = this.state.activeOrders
     return (
       <div>
-        <Route exact path="/" render={() => <Home orders={orders} />} />
+        <Route exact path="/" render={(props) => <Home orders={orders} {...props} />} />
         <Route path="/test" component={Test} />
         <Route path="/add" render={(props) => <Add addOrder={this.addOrder} {...props}/>} />
+        <Route path="*" render={() =><h1>Sorry, no route found</h1>} />
       </div>
     )
   },
