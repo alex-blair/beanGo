@@ -27,12 +27,21 @@ const App = React.createClass({
               <Add addOrder={this.addOrder} currentOrder={currentOrder} />
             )
           }} />
-          <Route render={() =><h1>Sorry, no route found</h1>} />  
+          <Route render={() =><h1>Sorry, no route found</h1>} />
         </Switch>
       </div>
     )
   },
   addOrder (newOrder) {
+    // if (newOrder.id) {
+    //   this.state.activeOrders.filter(function (order) {
+    //     order.id === newOrder.id
+    //   })
+    // } else {
+    //
+    // }
+    console.log('new Order', newOrder)
+    console.log('james was here')
     let id = this.state.activeOrders.length++
     newOrder.id = id
     console.log(...this.state.activeOrders)

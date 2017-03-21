@@ -25,7 +25,7 @@ const Add = React.createClass({
       error: err,
       coffeeType: coffee
     })
-    console.log('Current State', this.state.coffeeType)
+    // console.log('Current State', this.state.coffeeType)
   },
   render () {
     // console.log(this.props)
