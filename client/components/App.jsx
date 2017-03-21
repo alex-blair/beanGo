@@ -1,10 +1,9 @@
 import React from 'react'
 import Add from './Add'
 
-import {Route} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Home from './Home'
-import Test from './Test'
 
 const App = React.createClass({
   getInitialState () {
@@ -16,19 +15,20 @@ const App = React.createClass({
     const orders = this.state.activeOrders
     return (
       <div>
-        <Route exact path="/" render={(props) => <Home orders={orders} {...props} />} />
-        <Route path="/test" component={Test} />
-        <Route path="/add" render={(props) => <Add addOrder={this.addOrder} {...props} />} />
-        <Route path="/edit/:id" render={(props) => {
-          console.log(props)
-          var currentOrder = this.state.activeOrders.filter(function (order) {
-            return order.id === Number(props.match.params.id)
-          } )[0]
-          return (
-            <Add addOrder={this.addOrder} currentOrder={currentOrder} />
-          )
-        }} />
-        <Route path="*" render={() =><h1>Sorry, no route found</h1>} />
+        <Switch>
+          <Route exact path="/" render={(props) => <Home orders={orders} {...props} />} />
+          <Route path="/add" render={(props) => <Add addOrder={this.addOrder} {...props} />} />
+          <Route path="/edit/:id" render={(props) => {
+            console.log(props)
+            var currentOrder = this.state.activeOrders.filter(function (order) {
+              return order.id === Number(props.match.params.id)
+            } )[0]
+            return (
+              <Add addOrder={this.addOrder} currentOrder={currentOrder} />
+            )
+          }} />
+          <Route render={() =><h1>Sorry, no route found</h1>} />  
+        </Switch>
       </div>
     )
   },
