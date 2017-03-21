@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Order = props => {
   // const addSpaceBetweenModifiers = props.order.modifiers.map (modifier => ' ' + modifier)
-  const addSpaceBetweenModifiers = props.order.modifiers.join (' & ')
+
   return (
     <div className='orderContainer'>
       <div className='orderName'>
@@ -18,7 +18,7 @@ const Order = props => {
         </div>
           {props.order.modifiers.length === 0
             ? null
-            : <div className='modifiers property'>{'with ' + addSpaceBetweenModifiers}</div>}
+            : <div className='modifiers property'>{'with ' + props.order.modifiers}</div>}
           {props.order.sugars === 0
             ? null
             : <div className='sugars property'>{props.order.sugars + ' x sugar'}</div>}

@@ -3,9 +3,9 @@ var config = require('../knexfile')[environment]
 var knex = require('knex')(config)
 
 module.exports = {
-  getCoffeeList: getCoffeeList,
+  getCoffeeList: getCoffeeList
 }
 
 function getCoffeeList () {
-  return knex('coffees')
+  return knex('orders')
 }

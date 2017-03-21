@@ -7,6 +7,7 @@ const OrderList = props => {
   return (
     <div className='OrderList'>
       <h2>Order List</h2>
+      {console.log(props.orders)}
       <ul>
         {props.orders.map(order => {
           return (
@@ -17,6 +18,5 @@ const OrderList = props => {
     </div>
   )
 }
-
 
 export default OrderList
