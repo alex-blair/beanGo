@@ -1,5 +1,7 @@
 import React from 'react'
 
+import api from '../api'
+
 const Add = React.createClass({
   getInitialState () {
     return {
@@ -11,11 +13,22 @@ const Add = React.createClass({
         sugars: 0,
         comments: '',
         ...this.props.currentOrder
-      }
+      },
+      coffeeType: []
     }
   },
+  componentDidMount () {
+    api.getCoffeeList(this.renderCoffeeList)
+  },
+  renderCoffeeList (err, coffee) {
+    this.setState({
+      error: err,
+      coffeeType: coffee
+    })
+    console.log('Current State', this.state.coffeeType)
+  },
   render () {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div className='add'>
         <h3>Add your order</h3>
@@ -27,19 +40,11 @@ const Add = React.createClass({
           <h4>Type</h4>
           <select name='type' onChange={this.updateType} defaultValue={this.state.order.type}>
             <option value='No Drink Selected'>Select drink</option>
-            <option value='Mocha'>Mocha</option>
-            <option value='Flat White'>Flat White</option>
-            <option value='Short Black'>Short Black</option>
-            <option value='Long Black'>Long Black</option>
-            <option value='Cappuccino'>Cappuccino</option>
-            <option value='Latte'>Latte</option>
-            <option value='Hot Chocolate'>Hot Chocolate</option>
-            <option value='Americano'>Americano</option>
-            <option value='Green Tea'>Green Tea</option>
-            <option value='Earl Grey'>Earl Grey</option>
-            <option value='Rooibos'>Roobios</option>
-            <option value='Iced Chocolate'>Iced Chocolate</option>
-            <option value='Iced Coffee'>Iced Coffee</option>
+            {this.state.coffeeType.map(coffee => {
+              return (
+                <option key={coffee.id} value={coffee.name}>{coffee.name}</option>
+              )
+            })}
           </select>
           <h4>Size or Keep Cup</h4>
           <div className='sizeSelect'>

@@ -35,6 +35,7 @@
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
+    "sqlite3": "^3.1.8",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.3",
     "webpack": "^1.14.0",
@@ -43,6 +44,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "knex": "^0.12.8"
+    "knex": "^0.12.8",
+    "superagent": "^3.5.1"
   }
 }
