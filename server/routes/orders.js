@@ -31,13 +31,15 @@ router.post('/', function (req, res) {
   }
   
   db.addOrder(order)
-    .then(result => res.send({ message: 'Added Order' }))
+    .then(result => res.send({ message: `Order Added with ID: ${result}`, id: result[0] }))
 })
 
 router.delete('/:id', function(req, res) {
   const orderId = req.params.id
   db.completeOrder(orderId)
-    .then(result => res.json({ message: 'Deleted Order' }))
+    .then(result => {
+      res.send({ message: `Orders Deleted: ${result}`, rows: result })
+    })
 })
 
 
