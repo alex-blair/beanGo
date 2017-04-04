@@ -6,7 +6,6 @@ var db = require('../../db/db')
 router.get('/', function (req, res) {
   db.getCoffeeList()
     .then(function (result) {
-      console.log(result)
       res.send(result)
     })
 })
