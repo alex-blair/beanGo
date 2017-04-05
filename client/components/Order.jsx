@@ -1,5 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { deleteOrder, editOrder } from '../actions'
 
 const Order = props => {
   // const addSpaceBetweenModifiers = props.order.modifiers.map (modifier => ' ' + modifier)
@@ -27,11 +29,24 @@ const Order = props => {
             : <div className='comments property'>{props.order.comments}</div>}
 
         <div className='edit property'>
-          <Link to={`/edit/${props.order.id}`}><button className='editButton'>Edit</button></Link>
+          <button className='editButton' onClick={() => props.editOrder(props.order.id)}>Edit</button>
+        </div>
+        <div className='delete property'>
+          <button onClick={() => props.deleteOrder(props.order.id)} className='deleteButton'>Delete</button>
         </div>
       </div>
     </div>
   )
 }
 
-export default Order
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteOrder: (id) => {
+      dispatch(deleteOrder(id))
+    },
+    editOrder: (id) => {
+      dispatch(editOrder(id))
+    }
+  }
+}
+export default connect(null, mapDispatchToProps)(Order)

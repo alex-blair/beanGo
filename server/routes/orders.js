@@ -18,9 +18,8 @@ router.get('/', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-  
   const { name, type, size, modifiers, sugars, comments } = req.body
-  
+
   const order = {
     name,
     type,
@@ -29,7 +28,7 @@ router.post('/', function (req, res) {
     sugars,
     comments
   }
-  
+
   db.addOrder(order)
     .then(result => res.send({ message: `Order Added with ID: ${result}`, id: result[0] }))
 })
@@ -42,6 +41,22 @@ router.delete('/:id', function(req, res) {
     })
 })
 
+router.put('/edit/:id', function (req, res) {
+  const { name, type, size, modifiers, sugars, comments } = req.body
 
+  const order = {
+    name,
+    type,
+    size,
+    modifiers: modifiers ? modifiers.join() : '',
+    sugars,
+    comments
+  }
+  const orderId = req.params.id
+  db.updateOrder(orderId, order)
+  .then(result => {
+    res.send({ message: `Order Updated: ${result}`, rows: result })
+  })
+})
 
 module.exports = router

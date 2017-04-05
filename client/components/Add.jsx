@@ -1,31 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { updateOrderField, updateModifiers, saveOrder } from '../actions'
 
 const Add = React.createClass({
-  getInitialState () {
-    return {
-      order: {
-        name: '',
-        type: '',
-        size: '',
-        modifiers: [],
-        sugars: 0,
-        comments: '',
-        ...this.props.currentOrder
-      }
-    }
-  },
   render () {
-    console.log(this.props)
     return (
       <div className='add'>
         <h3>Add your order</h3>
         <div className='addForm'>
           <h4>Name</h4>
           <input type='text' name='name'
-            onChange={this.updateName}
-            value={this.state.order.name} />
+            onChange={this.updateOrderField}
+         />
           <h4>Type</h4>
-          <select name='type' onChange={this.updateType} defaultValue={this.state.order.type}>
+          <select name='type' onChange={this.updateOrderField} defaultValue='No Drink Selected'>
             <option value='No Drink Selected'>Select drink</option>
             <option value='Mocha'>Mocha</option>
             <option value='Flat White'>Flat White</option>
@@ -43,75 +31,56 @@ const Add = React.createClass({
           </select>
           <h4>Size or Keep Cup</h4>
           <div className='sizeSelect'>
-            <input onChange={this.updateSize} type='radio' name='size' value='Small' checked={this.state.order.size === 'Small'} />Small
-            <input onChange={this.updateSize} type='radio' name='size' value='Large' checked={this.state.order.size === 'Large'} />Large
-            <input onChange={this.updateSize} type='radio' name='size' value='Keep Cup' checked={this.state.order.size === 'Keep Cup'} />Keep Cup
+            <input onChange={this.updateOrderField} type='radio' name='size' value='Small' checked={this.props.size === 'Small'} />Small
+            <input onChange={this.updateOrderField} type='radio' name='size' value='Large' checked={this.props.size === 'Large'} />Large
+            <input onChange={this.updateOrderField} type='radio' name='size' value='Keep Cup' checked={this.props.size === 'Keep Cup'} />Keep Cup
           </div>
           <h4>Modifiers</h4>
-          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Soy' checked={this.state.order.modifiers.includes('Soy')} />Soy Milk
-          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Almond' checked={this.state.order.modifiers.includes('Almond')} />Almond Milk
-          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Cinnamon' checked={this.state.order.modifiers.includes('Cinnamon')} />Cinnamon Sprinkles
-          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Chocolate' checked={this.state.order.modifiers.includes('Chocolate')} />Chocolate Sprinkles
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Soy' checked={this.props.modifiers.includes('Soy')} />Soy Milk
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Almond' checked={this.props.modifiers.includes('Almond')} />Almond Milk
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Cinnamon' checked={this.props.modifiers.includes('Cinnamon')} />Cinnamon Sprinkles
+          <input onChange={this.updateModifiers} type='checkbox' name='modifiers' value='Chocolate' checked={this.props.modifiers.includes('Chocolate')} />Chocolate Sprinkles
           <h4>Sugars</h4>
-          <input onChange={this.updateSugars} type='number' name='sugars' value={this.state.order.sugars} min='0' max='4' />
+          <input onChange={this.updateOrderField} type='number' name='sugars' min='0' max='4' />
           <h4>Additional Comments</h4>
           <input type='text' name='comments'
-            onChange={this.updateComments}
-            value={this.state.order.comments} />
+            onChange={this.updateOrderField}
+          />
         </div>
         <button onClick={this.handleClick}>Add your Order!</button>
       </div>
     )
   },
   handleClick () {
-    this.props.addOrder(this.state.order)
-    this.props.history.push('/')
-  },
-  updateFormState (field, newValue) {
-    const newState = {
-      order: {
-        ...this.state.order,
-        [field]: newValue
-      }
-    }
-    this.setState(newState)
-  },
-  updateName (evt) {
-    const value = evt.target.value
-    const name = evt.target.name
-    this.updateFormState(name, value)
-  },
-  updateType (evt) {
-    const value = evt.target.value
-    const type = evt.target.name
-    this.updateFormState(type, value)
-  },
-  updateSize (evt) {
-    const value = evt.target.value
-    const size = evt.target.name
-    this.updateFormState(size, value)
+    this.props.saveOrder()
   },
   updateModifiers (evt) {
-    let modifiers = this.state.order.modifiers
-    if (evt.target.checked) {
-      modifiers.push(evt.target.value)
-    } else {
-      modifiers = modifiers.filter(modifier => (modifier !== evt.target.value))
-    }
-    console.log(modifiers)
-    let field = evt.target.name
-    this.updateFormState(field, modifiers)
+    this.props.updateModifiers(evt.target.value)
   },
-  updateSugars (evt) {
-    const value = evt.target.value
-    const field = evt.target.name
-    this.updateFormState(field, value)
-  },
-  updateComments (evt) {
-    const value = evt.target.value
-    const comment = evt.target.name
-    this.updateFormState(comment, value)
+  updateOrderField (e) {
+    this.props.updateOrderField(e.target.name, e.target.value)
   }
 })
 
-export default Add
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateOrderField: (key, value) => {
+      dispatch(updateOrderField(key, value))
+    },
+    updateModifiers: (value) => {
+      dispatch(updateModifiers(value))
+    },
+    saveOrder: (order) => {
+      dispatch(saveOrder(order))
+    }
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    modifiers: state.orderForm.modifiers,
+    size: state.orderForm.size
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Add)

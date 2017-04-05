@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 // import {Link} from 'react-router'
 
 import Order from './Order'
@@ -18,5 +19,10 @@ const OrderList = props => {
   )
 }
 
+const mapStateToProps = (state) => {
+  return {
+    orders: state.orders
+  }
+}
 
-export default OrderList
+export default connect(mapStateToProps)(OrderList)

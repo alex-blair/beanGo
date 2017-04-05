@@ -6,7 +6,8 @@ module.exports = {
   getCoffeeList,
   getOrders,
   addOrder,
-  completeOrder
+  completeOrder,
+  updateOrder
 }
 
 function getCoffeeList () {
@@ -26,4 +27,10 @@ function completeOrder (orderId) {
   return knex('orders')
     .where({id: orderId})
     .del()
+}
+
+function updateOrder (orderId, orderDetails) {
+  return knex('orders')
+    .where({id: orderId})
+    .update(orderDetails)
 }
